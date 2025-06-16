@@ -1,11 +1,24 @@
 import { FacebookLogo, InstagramLogo, LinkedinLogo, Sun } from "phosphor-react";
 import Botao from "./components/Botao/Botao";
+import { useState } from "react";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  function handleChangeMode() {
+    // O operador de negação `!` inverte o valor booleano de `darkMode`.
+    // Se `darkMode` for `true`, ele se tornará `false`, e vice-versa.
+    // Isso é usado para alternar entre os modos claro e escuro.
+    setDarkMode(!darkMode)
+  }
+
   return (
-    <main className="h-screen w-full overflow-hidden">
+    <main className={`h-screen w-full overflow-hidden ${darkMode ? "bg-slate-900" : "bg-white"} transition-all`}>
       <header className="flex justify-end p-4">
-        <button className="p-2 hover:bg-gray-200 text-black rounded-lg cursor-pointer transition-all duration-300">
+        <button
+          onClick={handleChangeMode}
+          className="p-2 hover:bg-gray-200 text-black rounded-lg cursor-pointer transition-all duration-300"
+        >
           <Sun size={16} />
         </button>
       </header>
@@ -18,10 +31,10 @@ function App() {
             className="h-32 w-32 rounded-full border-4 border-gray-300"
           />
 
-          <h1 className="font-bold text-2xl">Gabriel Angelo</h1>
+          <h1 className={`font-bold text-2xl ${darkMode ? "text-white" : "text-black"}`}>Gabriel Angelo</h1>
           <p className="text-slate-500">Desenvolvedor Full Stack</p>
 
-          <section className="w-full space-y-4">
+          <section className={`w-full space-y-4 ${darkMode ? "text-white" : "text-black"}`}>
             <Botao>
               <a
                 target="_blank"
